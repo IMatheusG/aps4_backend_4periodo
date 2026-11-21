@@ -38,6 +38,10 @@ class ParticipanteService:
     def atualizar(self, db: Session, participante: ParticipanteResponse) -> ParticipanteResponse:        
         participante = ParticipanteModel(**participante.model_dump())
 
+        existe = self.repository.buscar_por_id(db, participante.id)
+        if existe is None or not existe:
+            raise Excecao("Participante não encontrado", 404)
+
         if participante.nome == '':
             raise Excecao("O nome não pode ser vazio!")
         if participante.email == '':
@@ -49,10 +53,8 @@ class ParticipanteService:
         if duplicidade:
             raise Excecao("Este e-mail já está sendo utilizado por outro participante!", 409)
 
-        
         participante = self.repository.atualizar(db, participante) 
-        if participante is None or not participante:
-            raise Excecao("Participante não encontrado!", 404)
+
         return participante
     
     def excluir(self, db: Session ,participante_id): 
