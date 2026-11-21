@@ -5,6 +5,8 @@
 2. A rota /eventos/{evento_id}/inscricoes não retorna todos os dados do evento pq fica redundante, deixamos apenas com os dados das inscrições e dos participantes.
 
 # Observações:
+0. Gere um arquivo .env com as variáveis do .env.example, caso vc não gere, o código vai puxar uns valores padrões q tá no auth.py
+
 1. Acabamos instalando uma biblioteca chamda rich do python q o gemini recomendou, pq tava insuportável ler 50 linhas de mensagem de erro pra cada 1 problema no código. 
 Ela basicamente só oculta os erros que não pertencem ao código, e sim a biblioteca que está sendo utilizada, assim mostra direto o erro no seu código. aí pegamos um código adaptado do gemini no main.app pra mostrar apenas nossos erros.
 Outro ponto é que no localhost/docs antes retornava status code 500 com internal server error, graças a este código agora ele retorna direto o erro q deu no código.
