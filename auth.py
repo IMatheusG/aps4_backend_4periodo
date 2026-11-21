@@ -11,9 +11,10 @@ from excecao import Excecao
 
 load_dotenv()
 
-SECRET_KEY = os.getenv("SECRET_KEY")
-ALGORITH = os.getenv("ALGORITH")
-EXPIRACAO_TOKEN_MINUTOS = int(os.getenv("EXPIRACAO_TOKEN_MINUTOS", 1))
+
+SECRET_KEY = os.getenv("SECRET_KEY", "senha_super_secreta_123456")
+ALGORITH = os.getenv("ALGORITH", "HS256")
+EXPIRACAO_TOKEN_MINUTOS = int(os.getenv("EXPIRACAO_TOKEN_MINUTOS", 60))
 
 from database import get_db
 from models.usuario_model import UsuarioModel
