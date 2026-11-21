@@ -39,6 +39,10 @@ class EventoService:
         return eventos
     
     def listar_inscricoes(self, db: Session, evento_id: int) -> list[EventoInscricaoResponse]:
+        evento = self.repository.buscar_completo(db, evento_id)
+        if evento is None or not evento:
+            raise Excecao("Evento não encontrado", 404)
+            
         inscricoes = self.repository.listar_inscricoes(db, evento_id)
         if not inscricoes:
             raise Excecao("Este evento ainda não tem inscrições!")
